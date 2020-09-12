@@ -1,5 +1,5 @@
 *controls
-Data and passwords manager
+<br/>Data and passwords manager
 
 *repository
-GitLab repository for developing controls
+<br/>GitLab repository for developing controls
