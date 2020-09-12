@@ -3,4 +3,4 @@ project(controls)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(controls main.cpp)
+add_executable(controls main.cpp CommandLine/CommandLine.cpp CommandLine/CommandLine.h Actions/Actions.cpp Actions/Actions.h FileInt/FileInt.cpp FileInt/FileInt.h)
