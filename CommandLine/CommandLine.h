@@ -4,9 +4,11 @@
 
 #ifndef CONTROLS_COMMANDLINE_H
 #define CONTROLS_COMMANDLINE_H
+#define DATA
 
 
 #include <iostream>
+#include <fstream>
 
 class CommandLine {
 public:

@@ -12,7 +12,8 @@
 
 class Actions {
 public:
-    Actions(CommandLine *cmd);
+    Actions();
+    ~Actions();
     std::string help();
 
 public CATEGORY:
@@ -26,7 +27,7 @@ public FILE:
     std::string rmFile();
 
 private:
-    CommandLine *itsCmd;
+    std::ifstream *itsFile;
 };
 
 
