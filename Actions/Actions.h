@@ -19,15 +19,17 @@ public:
 public CATEGORY:
     std::string createCat();
     std::string listCat();
+    std::string listCat(bool files);
     std::string rmCat();
 
 public FILE:
-    std::string createFile();
+    std::string writeFile();
     std::string listFile();
     std::string rmFile();
 
 private:
     std::ifstream *itsFile;
+    CommandLine *itsCmd;
 };
 
 

@@ -21,6 +21,10 @@ CommandLine::CommandLine(int c, char *v[]) {
     }
 }
 
+CommandLine::CommandLine() {
+
+}
+
 inline std::string CommandLine::getCommand() const {
     return itsCommand;
 }
@@ -31,4 +35,12 @@ inline std::string CommandLine::getArgument() const {
 
 inline int CommandLine::getCount() const {
     return itsCount;
+}
+
+std::string CommandLine::getInfo(std::string name) {
+    std::string out;
+    std::cout << name;
+    std::cin >> out;
+
+    return out;
 }
