@@ -2,13 +2,13 @@
 // Created by alexvim on 9/12/20.
 //
 
+#include "../CommandLine/CommandLine.h"
+
 #ifndef CONTROLS_ACTIONS_H
 #define CONTROLS_ACTIONS_H
 #define CATEGORY
 #define FILE
 
-
-#include "../CommandLine/CommandLine.h"
 
 class Actions {
 public:

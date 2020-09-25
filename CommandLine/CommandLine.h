@@ -2,13 +2,12 @@
 // Created by alexvim on 9/12/20.
 //
 
-#ifndef CONTROLS_COMMANDLINE_H
-#define CONTROLS_COMMANDLINE_H
-#define DATA
-
-
 #include <iostream>
 #include <fstream>
+
+#ifndef CONTROLS_COMMANDLINE_H
+#define CONTROLS_COMMANDLINE_H
+
 
 class CommandLine {
 public:

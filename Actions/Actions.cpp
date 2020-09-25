@@ -53,10 +53,15 @@ std::string Actions::createCat() {
 }
 
 std::string Actions::writeFile() {
-    std::string cat = itsCmd->getInfo("Category name: ");
-    std::string pwd = itsCmd->getInfo("Category password: ");
-    std::string name = itsCmd->getInfo("File name: ");
-    std::string data = itsCmd->getInfo("File data: ");
+    std::string name, cat, data, pwd;
+    std::cout << "Category name: ";
+    std::cin >> cat;
+    std::cout << "Category password: ";
+    std::cin >> pwd;
+    std::cout << "File name: ";
+    std::cin >> name;
+    std::cout << "File data: ";
+    std::cin >> data;
     system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && " +
         "rm ../build/init && mv '" + name + "' ../backup/ && echo '" + data + "' >> ../build/'" + name +
             "' && zip -e -P '" + pwd + "' '" + cat +
@@ -88,7 +93,6 @@ std::string Actions::listCat() {
 std::string Actions::listCat(bool files) {
     std::string name = itsCmd->getInfo("Category name: ");
     std::string pwd = itsCmd->getInfo("Category password: ");
-    std::cin >> pwd;
     system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + name + ".zip' -d ../build/ && "
         "cd ~/.controls/build/ && rm ../controls/count && ls >> ../controls/count && cd .. && rm -rf build/*").c_str());
     itsFile->open("~/.controls/controls/count");
