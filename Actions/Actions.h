@@ -14,7 +14,8 @@ class Actions {
 public:
     Actions();
     ~Actions();
-    std::string help();
+    std::string help() const;
+    std::string error() const;
 
 public CATEGORY:
     std::string createCat();

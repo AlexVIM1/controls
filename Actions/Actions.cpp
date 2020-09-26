@@ -15,7 +15,7 @@ Actions::~Actions() {
     delete itsFile;
 }
 
-std::string Actions::help() {
+std::string Actions::help() const {
     return "Insert data:\n"
            "\tcreate:\n"
            "\t\t* category - create group of data files\n"
@@ -43,27 +43,26 @@ std::string Actions::help() {
            "\t* Get docs in https://github.com/AlexVIM1/controls or https://gitlab.com/alexvim/controls\n";
 }
 
+std::string Actions::error() const {
+    return "'help' to list manual\n";
+}
+
 std::string Actions::createCat() {
     std::string name = itsCmd->getInfo("Category name: ");
     std::string pwd = itsCmd->getInfo("Category password: ");
-    system(("cd ~/.controls/data/ && touch init && mv '" + name + ".zip' ../backup/ && zip -e -P '" + pwd +
+    system(("cd ~/.controls/data/ && touch init && mv '" + name + ".zip' ../backup/ ; zip -e -P '" + pwd +
         "' '" + name + ".zip' init && rm init").c_str());
 
     return name;
 }
 
 std::string Actions::writeFile() {
-    std::string name, cat, data, pwd;
-    std::cout << "Category name: ";
-    std::cin >> cat;
-    std::cout << "Category password: ";
-    std::cin >> pwd;
-    std::cout << "File name: ";
-    std::cin >> name;
-    std::cout << "File data: ";
-    std::cin >> data;
+    std::string cat = itsCmd->getInfo("Category name: ");
+    std::string pwd = itsCmd->getInfo("Category password: ");
+    std::string name = itsCmd->getInfo("File name: ");
+    std::string data = itsCmd->getInfo("File data: ");
     system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && " +
-        "rm ../build/init && mv '" + name + "' ../backup/ && echo '" + data + "' >> ../build/'" + name +
+        "rm ../build/init && mv '" + name + "' ../backup/ ; echo '" + data + "' >> ../build/'" + name +
             "' && zip -e -P '" + pwd + "' '" + cat +
                 ".zip' ../build/* && rm -rf ../build/*").c_str());
 
@@ -75,7 +74,7 @@ std::string Actions::listCat() {
     itsFile->open("~/.controls/controls/count");
     std::string out, el;
     char ex[255];
-    while (getline(itsFile, el)) {
+    while (getline(*itsFile, el)) {
         for (int i = 0; i < el.size(); i++) {
             if (i == el.size()-3) {
                 break;
@@ -97,7 +96,7 @@ std::string Actions::listCat(bool files) {
         "cd ~/.controls/build/ && rm ../controls/count && ls >> ../controls/count && cd .. && rm -rf build/*").c_str());
     itsFile->open("~/.controls/controls/count");
     std::string out, el;
-    while (getline(itsFile, el)) {
+    while (getline(*itsFile, el)) {
         out.append(el);
     }
     itsFile->close();
@@ -111,11 +110,11 @@ std::string Actions::listFile() {
     std::string pwd = itsCmd->getInfo("Category password: ");
     std::string name = itsCmd->getInfo("File name: ");
     system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && "
-        "cd ~/.controls/build/ && rm ../controls/file && cat '" + name +
+        "cd ~/.controls/build/ && rm ../controls/file ; cat '" + name +
             "' >> ../controls/file && cd .. && rm -rf build/*").c_str());
     itsFile->open("~/.controls/controls/file");
     std::string out, el;
-    while (getline(itsFile, el)) {
+    while (getline(*itsFile, el)) {
         out.append(el);
     }
     itsFile->close();
@@ -126,15 +125,8 @@ std::string Actions::listFile() {
 
 std::string Actions::rmCat() {
     std::string name = itsCmd->getInfo("Category name: ");
-    system(("cd ~/.controls/data/ && rm ../.controls/controls/rm && rm '" + name +
-        ".zip' 2> ../controls/rm").c_str());
-    itsFile->open("~/.controls/controls/rm");
-    std::string out, el;
-    while (getline(itsFile, el)) {
-        out.append(el);
-    }
-    itsFile->close();
-    std::cout << out;
+    system(("cd ~/.controls/data/ && rm ../.controls/controls/rm ; rm '" + name +
+        ".zip'").c_str());
 
     return name;
 }
@@ -144,15 +136,8 @@ std::string Actions::rmFile() {
     std::string pwd = itsCmd->getInfo("Category password: ");
     std::string name = itsCmd->getInfo("File name: ");
     system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && rm ../controls/rm"
-        " && rm ../build/'" + name + "' 2> ../controls/rm  && zip -e -P '" + pwd + "' '" + cat +
+        " && rm ../build/'" + name + "' ; zip -e -P '" + pwd + "' '" + cat +
             ".zip' ../build/* && rm -rf ../build/*").c_str());
-    itsFile->open("~/.controls/controls/rm");
-    std::string out, el;
-    while (getline(itsFile, el)) {
-        out.append(el);
-    }
-    itsFile->close();
-    std::cout << out;
 
     return name;
 }

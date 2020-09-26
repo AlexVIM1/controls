@@ -14,9 +14,9 @@ public:
     CommandLine(int c, char *v[]);
     CommandLine();
     std::string getInfo(std::string name);
-    inline std::string getCommand() const;
-    inline std::string getArgument() const;
-    inline int getCount() const;
+    std::string getCommand() const;
+    std::string getArgument() const;
+    int getCount() const;
 
 private:
     int itsCount;

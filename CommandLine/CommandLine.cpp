@@ -7,13 +7,14 @@
 CommandLine::CommandLine(int c, char *v[]) {
     if (c <= 1) {
         itsCommand = "help";
+        itsCount = 0;
     } else {
         for (int i = 0; i < c; i++) {
-            if (i == 2) {
+            if (i == 1) {
                 itsCommand = v[i];
                 itsCount = 1;
             }
-            if (i == 3) {
+            if (i == 2) {
                 itsArgument = v[i];
                 itsCount = 2;
             }
@@ -25,15 +26,15 @@ CommandLine::CommandLine() {
 
 }
 
-inline std::string CommandLine::getCommand() const {
+std::string CommandLine::getCommand() const {
     return itsCommand;
 }
 
-inline std::string CommandLine::getArgument() const {
+std::string CommandLine::getArgument() const {
     return itsArgument;
 }
 
-inline int CommandLine::getCount() const {
+int CommandLine::getCount() const {
     return itsCount;
 }
 
