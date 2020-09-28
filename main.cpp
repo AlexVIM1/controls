@@ -17,6 +17,28 @@ int main(int argc, char *argv[]) {
             if (cmd->getArgument() == "cat") {
                 act->createCat();
             }
+
+            if (cmd->getArgument() == "file") {
+                act->writeFile();
+            }
+
+            else {
+                std::cout << act->error();
+            }
+        }
+
+        if (cmd->getCommand() == "list") {
+            if (cmd->getArgument() == "cats") {
+                act->listCat();
+            }
+
+            if (cmd->getArgument() == "file") {
+                act->listFile();
+            }
+
+            else {
+                std::cout << act->error();
+            }
         }
 
         else {

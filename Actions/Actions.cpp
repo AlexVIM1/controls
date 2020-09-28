@@ -61,16 +61,15 @@ std::string Actions::writeFile() {
     std::string pwd = itsCmd->getInfo("Category password: ");
     std::string name = itsCmd->getInfo("File name: ");
     std::string data = itsCmd->getInfo("File data: ");
-    system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && " +
-        "rm ../build/init && mv '" + name + "' ../backup/ ; echo '" + data + "' >> ../build/'" + name +
-            "' && zip -e -P '" + pwd + "' '" + cat +
-                ".zip' ../build/* && rm -rf ../build/*").c_str());
+    system(("cd ~/.controls/data/ && rm -rf ../build/* && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && "
+        "rm ../build/init > ../controls/tmp && mv '" + name + "' ../backup/ > ../controls/tmp ; echo '" + data + "' >> ../build/'" + name +
+            "' && cd ../build/ && zip -e -P '" + pwd + "' ../data/'" + cat + ".zip' * && rm -rf *").c_str());
 
     return name;
 }
 
 std::string Actions::listCat() {
-    system("cd ~/.controls/data/ && rm ../controls/count && ls >> ../controls/count");
+    system("cd ~/.controls/data/ && rm ../controls/count ; ls >> ../controls/count");
     itsFile->open("~/.controls/controls/count");
     std::string out, el;
     char ex[255];
@@ -109,16 +108,8 @@ std::string Actions::listFile() {
     std::string cat = itsCmd->getInfo("Category name: ");
     std::string pwd = itsCmd->getInfo("Category password: ");
     std::string name = itsCmd->getInfo("File name: ");
-    system(("cd ~/.controls/data/ && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && "
-        "cd ~/.controls/build/ && rm ../controls/file ; cat '" + name +
-            "' >> ../controls/file && cd .. && rm -rf build/*").c_str());
-    itsFile->open("~/.controls/controls/file");
-    std::string out, el;
-    while (getline(*itsFile, el)) {
-        out.append(el);
-    }
-    itsFile->close();
-    std::cout << out;
+    system(("cd ~/.controls/data/ && rm -rf ../build/* && unzip -P '" + pwd + "' '" + cat + ".zip' -d ../build/ && "
+        "cd ~/.controls/build/ && rm ../controls/file ; cat '" + name + "' && cd .. && rm -rf build/*").c_str());
 
     return name;
 }
