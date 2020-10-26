@@ -41,7 +41,7 @@ int CommandLine::getCount() const {
 std::string CommandLine::getInfo(std::string name) {
     std::string out;
     std::cout << name;
-    std::cin >> out;
+    std::getline(std::cin, out);
 
     return out;
 }

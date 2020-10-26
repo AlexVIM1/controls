@@ -13,12 +13,12 @@ int main(int argc, char *argv[]) {
             std::cout << act->help();
         }
 
-        if (cmd->getCommand() == "write") {
+        else if (cmd->getCommand() == "write") {
             if (cmd->getArgument() == "cat") {
                 act->createCat();
             }
 
-            if (cmd->getArgument() == "file") {
+            else if (cmd->getArgument() == "file") {
                 act->writeFile();
             }
 
@@ -27,12 +27,16 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        if (cmd->getCommand() == "list") {
+        else if (cmd->getCommand() == "list") {
             if (cmd->getArgument() == "cats") {
                 act->listCat();
             }
 
-            if (cmd->getArgument() == "file") {
+            else if (cmd->getArgument() == "cat") {
+                act->listCat(true);
+            }
+
+            else if (cmd->getArgument() == "file") {
                 act->listFile();
             }
 
@@ -41,8 +45,17 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        else {
-            std::cout << act->error();
+        else if (cmd->getCommand() == "rm") {
+            if (cmd->getArgument() == "cat") {
+                act->rmCat();
+            }
+
+            else if (cmd->getArgument() == "file") {
+                act->rmFile();
+            }
+            else {
+                std::cout << act->error();
+            }
         }
     }
 
