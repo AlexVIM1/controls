@@ -1,4 +1,4 @@
-#Controls
+# Controls
 Data and passwords manager  
 Supporting by AlexVIM  
 License: GPLv3
@@ -25,7 +25,7 @@ License: GPLv3
     * file - remove file in the category  
     *Example: **controls rm file***
 
-#Contacs
+# Contacs
 * [GitHub](https://github.com/AlexVIM1/controls)
 * [GitLab](https://gitlab.com/alexvim/controls)
 * [AUR](https://aur.archlinux.org/packages/controls)
