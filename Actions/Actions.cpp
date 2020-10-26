@@ -25,8 +25,8 @@ std::string Actions::help() const {
            "\t\t\tExample: controls write file\n"
            "Out data:\n"
            "\tlist:\n"
-	   "\t\t* categories - list all your categories\n"
-	   "\t\t\tExample: controls list cats\n"
+           "\t\t* categories - list all your categories\n"
+           "\t\t\tExample: controls list cats\n"
            "\t\t* category - list data files in category\n"
            "\t\t\tExample: controls list cat\n"
            "\t\t* file - out file data in the category\n"
@@ -69,6 +69,8 @@ std::string Actions::writeFile() {
 
 std::string Actions::listCat() {
     system("cd ~/.controls/data/ && ls -F | grep -v / | sed -r 's/^(.+)\\.[^.]+$/\\1/'");
+
+    return "~/.controls/data/";
 }
 
 std::string Actions::listCat(bool files) {
@@ -77,6 +79,8 @@ std::string Actions::listCat(bool files) {
     system(("cd ~/.controls/data/ && rm -rf build/*  >> ../controls/tmp && unzip -P '"
         + pwd + "' '" + name + ".zip' -d ../build/ >> ../controls/tmp && "
             "cd ~/.controls/build/ && ls && cd .. && rm -rf build/* 2> controls/tmp").c_str());
+
+    return name;
 }
 
 std::string Actions::listFile() {

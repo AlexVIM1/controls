@@ -1,2 +1,3 @@
 Category name: Category password: FIRST
 init
+free(): double free detected in tcache 2
